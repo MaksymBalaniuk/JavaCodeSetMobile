@@ -320,13 +320,6 @@ export class CodeBlockViewComponent implements OnInit {
     }
   }
 
-  editCodeBlock(): void {
-    if (this.codeBlock != null) {
-      this.dataLoadContextService.setCurrentCodeBlock(this.codeBlock);
-      this.dataLoadContextService.setLoadContext(LoadContext.CODE_BLOCK_EDIT);
-    }
-  }
-
   deleteCodeBlock(): void {
     if (this.codeBlock != null) {
       if (this.deleteCodeBlockSubscription$ != undefined) {
@@ -357,18 +350,5 @@ export class CodeBlockViewComponent implements OnInit {
     this.dataLoadContextService.setCurrentCodeBlock(null);
     this.dataLoadContextService.setLoadContext(LoadContext.PUBLIC_CODE_BLOCKS);
     this.navigationService.redirectToMainPage();
-  }
-
-  addNewCodeBlock(): void {
-    this.dataLoadContextService.setCurrentCodeBlock(null);
-    this.dataLoadContextService.clipboardCodeBlock = this.codeBlock;
-    this.dataLoadContextService.clipboardTags = this.tags;
-    this.dataLoadContextService.setLoadContext(LoadContext.CODE_BLOCK_EDIT);
-  }
-
-  openCodeBlockInCompiler(): void {
-    this.dataLoadContextService.clipboardCodeBlock = this.codeBlock;
-    this.dataLoadContextService.clipboardTags = this.tags;
-    this.navigationService.redirectToCompilerPage();
   }
 }

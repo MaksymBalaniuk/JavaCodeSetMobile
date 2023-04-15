@@ -62,14 +62,6 @@
   </mat-tab-group>
 </div>
 
-<div class="add-button" *ngIf="addCodeBlockButtonVisible && isAddCodeBlockButtonAvailable()">
-  <button mat-mini-fab
-          color="accent"
-          (click)="addNewCodeBlock()">
-    <mat-icon>add</mat-icon>
-  </button>
-</div>
-
 <app-no-results
   class="no-results"
   *ngIf="codeBlocks.length == 0">

@@ -18,22 +18,14 @@ p {
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
-  display: grid;
-  grid-column-gap: 15px;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  display: flex;
+  flex-direction: column;
 }
 
 .premium-card {
+  margin-top: 20px;
   margin-right: auto;
   margin-left: auto;
   max-width: 500px;
   min-width: 300px;
-}
-
-.premium-card:hover {
-  background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-  border-color: rgba(27,31,35,.35);
-  background-position: -.5em;
-  transform: translateY(-0.25rem);
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
 }

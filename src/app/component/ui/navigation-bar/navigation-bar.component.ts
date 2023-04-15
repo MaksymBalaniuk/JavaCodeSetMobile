@@ -47,10 +47,6 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
     return this.currentPage == CurrentPage.MAIN;
   }
 
-  isCompilerPageCurrent(): boolean {
-    return this.currentPage == CurrentPage.COMPILER;
-  }
-
   isPremiumPageCurrent(): boolean {
     return this.currentPage == CurrentPage.PREMIUM;
   }
@@ -61,10 +57,6 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
 
   redirectToMainPage(): void {
     this.navigationService.redirectToMainPage();
-  }
-
-  redirectToCompilerPage(): void {
-    this.navigationService.redirectToCompilerPage();
   }
 
   redirectToPremiumPage(): void {

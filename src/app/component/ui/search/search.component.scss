@@ -1,20 +1,13 @@
-.search-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 .main-search-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 5px;
 }
 
 .search-field {
-  width: 300px;
+  max-width: 100%;
   height: fit-content;
 }
 

@@ -28,10 +28,6 @@ export class CodeBlockPageComponent implements OnInit {
     return this.dataLoadContextService.getLoadContext() == LoadContext.CODE_BLOCK_VIEW;
   }
 
-  isLoadContextCodeBlockEdit(): boolean {
-    return this.dataLoadContextService.getLoadContext() == LoadContext.CODE_BLOCK_EDIT;
-  }
-
   isLoadContextCodeBlockNotSelected(): boolean {
     return this.dataLoadContextService.getLoadContext() != LoadContext.CODE_BLOCK_VIEW &&
       this.dataLoadContextService.getLoadContext() != LoadContext.CODE_BLOCK_EDIT;

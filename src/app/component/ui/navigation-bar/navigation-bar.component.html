@@ -6,61 +6,42 @@
            class="logo"
            (click)="redirectToMainPage()"/>
     </div>
-    <div class="nav-inner-container">
-      <div class="nav-links-container">
-        <button mat-button
-                [ngStyle]="{'text-decoration': isMainPageCurrent() ? 'underline' : 'none'}"
-                color="accent"
-                class="inner-content"
-                (click)="redirectToMainPage()">
-          Main
-        </button>
-        <button mat-button
-                [ngStyle]="{'text-decoration': isCompilerPageCurrent() ? 'underline' : 'none'}"
-                color="accent"
-                class="inner-content"
-                (click)="redirectToCompilerPage()"
-                *ngIf="authenticationContextService.isAuthorized$ | async">
-          Compiler
-        </button>
-        <button mat-button
-                [ngStyle]="{'text-decoration': isPremiumPageCurrent() ? 'underline' : 'none'}"
-                color="accent"
-                class="inner-content"
-                (click)="redirectToPremiumPage()"
-                *ngIf="authenticationContextService.isAuthorized$ | async">
-          Premium
-        </button>
-      </div>
-      <div class="nav-inner-container" *ngIf="!(authenticationContextService.isAuthorized$ | async)">
-        <button mat-raised-button
-                class="inner-content"
-                color="accent"
-                (click)="modalService.showRegistrationForm()">
-          Sign up
-        </button>
-        <button mat-raised-button
-                class="inner-content"
-                color="accent"
-                (click)="modalService.showAuthenticationForm()">
-          Sign in
-        </button>
-      </div>
-      <div class="nav-inner-container" *ngIf="authenticationContextService.isAuthorized$ | async">
-        <mat-icon class="inner-content">account_circle</mat-icon>
-        <mat-icon class="inner-content" *ngIf="userPremium">stars</mat-icon>
-        <p class="inner-content"
-           [ngStyle]="{'text-decoration': isProfilePageCurrent() ? 'underline' : 'none'}"
-           (click)="redirectToProfilePage()">
-          {{ username }}
-        </p>
-        <button mat-raised-button
-                class="inner-content"
-                color="accent"
-                (click)="authenticationContextService.logout()">
-          Sign out
-        </button>
-      </div>
-    </div>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item
+              [ngStyle]="{'text-decoration': isMainPageCurrent() ? 'underline' : 'none'}"
+              (click)="redirectToMainPage()">
+        Main
+      </button>
+      <button mat-menu-item
+              [ngStyle]="{'text-decoration': isPremiumPageCurrent() ? 'underline' : 'none'}"
+              (click)="redirectToPremiumPage()"
+              *ngIf="authenticationContextService.isAuthorized$ | async">
+        Premium
+      </button>
+      <button mat-menu-item
+              (click)="modalService.showAuthenticationForm()"
+              *ngIf="!(authenticationContextService.isAuthorized$ | async)">
+        Sign in
+      </button>
+      <button mat-menu-item
+              (click)="modalService.showRegistrationForm()"
+              *ngIf="!(authenticationContextService.isAuthorized$ | async)">
+        Sign up
+      </button>
+      <button mat-menu-item
+              [ngStyle]="{'text-decoration': isProfilePageCurrent() ? 'underline' : 'none'}"
+              (click)="redirectToProfilePage()"
+              *ngIf="authenticationContextService.isAuthorized$ | async">
+        Profile
+      </button>
+      <button mat-menu-item
+              (click)="authenticationContextService.logout()"
+              *ngIf="authenticationContextService.isAuthorized$ | async">
+        Sign out
+      </button>
+    </mat-menu>
   </div>
 </mat-toolbar>

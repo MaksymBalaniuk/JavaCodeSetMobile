@@ -28,9 +28,6 @@
               *ngIf="codeBlock.userId == currentUserDetails.user?.id">
         Share
       </button>
-      <button mat-raised-button class="action-button" color="primary" (click)="editCodeBlock()">
-        Edit
-      </button>
       <button mat-raised-button class="action-button" color="primary" (click)="deleteCodeBlock()">
         Delete
       </button>
@@ -45,12 +42,6 @@
               ngxClipboard
               [cbContent]="codeBlock.content">
         Copy code
-      </button>
-      <button mat-button (click)="addNewCodeBlock()">
-        Save code
-      </button>
-      <button mat-button (click)="openCodeBlockInCompiler()">
-        Open code in compiler
       </button>
     </mat-card-actions>
   </mat-card>

@@ -19,7 +19,6 @@ import {UserEntity} from "../../../entity/user-entity";
 export class MainPageComponent implements OnInit, OnDestroy {
 
   selectedTabIndex = 0;
-  addCodeBlockButtonVisible = false;
   currentUserPremiumLimits!: PremiumLimits;
   codeBlocks: Array<CodeBlockEntity> = [];
   fromUserShares: Array<UserEntity> = [];
@@ -51,9 +50,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
           this.dataLoadContextService.loadLastFilteredCodeBlocksContext();
         }
       });
-    if (this.dataLoadContextService.getLoadContext() == LoadContext.PRIVATE_CODE_BLOCKS) {
-      this.addCodeBlockButtonVisible = this.isAddCodeBlockButtonAvailable();
-    }
   }
 
   ngOnDestroy(): void {
@@ -95,42 +91,25 @@ export class MainPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  isAddCodeBlockButtonAvailable(): boolean {
-    if (this.currentUserPremiumLimits != undefined) {
-      return this.codeBlocks.length < this.currentUserPremiumLimits.codeBlocksLimit;
-    }
-    return false;
-  }
-
   loadPubicContext(): void {
-    this.addCodeBlockButtonVisible = false;
     this.loadContext(LoadContext.PUBLIC_CODE_BLOCKS);
   }
 
   loadPrivateContext(): void {
-    this.addCodeBlockButtonVisible = true;
     this.loadContext(LoadContext.PRIVATE_CODE_BLOCKS);
   }
 
   loadFavoritesContext(): void {
-    this.addCodeBlockButtonVisible = false;
     this.loadContext(LoadContext.FAVORITES_CODE_BLOCKS);
   }
 
   loadSharedContext(): void {
-    this.addCodeBlockButtonVisible = false;
     this.loadContext(LoadContext.SHARED_CODE_BLOCKS);
   }
 
   loadContext(loadContext: LoadContext): void {
     this.dataLoadContextService.setLoadContext(loadContext);
     this.dataLoadContextService.loadLastFilteredCodeBlocksContext();
-  }
-
-  addNewCodeBlock(): void {
-    this.dataLoadContextService.setCurrentCodeBlock(null);
-    this.dataLoadContextService.setLoadContext(LoadContext.CODE_BLOCK_EDIT);
-    this.navigationService.redirectToCodeBlockPage();
   }
 
   getFromUserIdShares(shares: Array<ShareEntity>): Array<string> {

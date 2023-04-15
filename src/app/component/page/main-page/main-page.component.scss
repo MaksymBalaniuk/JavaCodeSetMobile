@@ -14,21 +14,14 @@
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
-  display: grid;
-  grid-column-gap: 15px;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  display: flex;
+  flex-direction: column;
 }
 
 .chip-list-container {
   margin-top: 20px;
   margin-left: 20px;
   margin-right: 20px;
-}
-
-.add-button {
-  position: fixed;
-  right: 10px;
-  bottom: 10px;
 }
 
 .no-results {

@@ -1,27 +1,30 @@
 h2 {
-  font-size: 300%;
   white-space: normal;
+  line-height: normal;
 }
 
 h3 {
-  font-size: 200%;
   white-space: normal;
+  line-height: normal;
 }
 
 h4 {
-  font-size: 150%;
   white-space: normal;
+  line-height: normal;
 }
 
 code {
   white-space: pre-wrap;
+  font-size: 12px;
+  line-height: 12px;
+  display: inline-block;
 }
 
 mat-icon:hover {
   cursor: pointer;
 }
 
-.title, .description, .code-container, .estimates-container, .tags-container, .actions-container {
+.code-container, .estimates-container, .tags-container, .actions-container {
   margin-top: 5px;
 }
 

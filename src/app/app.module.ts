@@ -34,9 +34,7 @@ import {ClipboardModule} from "ngx-clipboard";
 import { CodeHighlightDirective } from './directive/code-highlight.directive';
 import {MatExpansionModule} from "@angular/material/expansion";
 import { CommentTimeSortPipe } from './pipe/comment-time-sort.pipe';
-import { CodeBlockEditComponent } from './component/ui/code-block-edit/code-block-edit.component';
 import { CodeBlockPageComponent } from './component/page/code-block-page/code-block-page.component';
-import {CompilerPageComponent} from "./component/page/compiler-page/compiler-page.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { PremiumPageComponent } from './component/page/premium-page/premium-page.component';
 import { ShareFormComponent } from './component/ui/share-form/share-form.component';
@@ -45,6 +43,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { ProfilePageComponent } from './component/page/profile-page/profile-page.component';
 import { ProfileCardComponent } from './component/ui/profile-card/profile-card.component';
 import { UpdateProfileFormComponent } from './component/ui/update-profile-form/update-profile-form.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -64,9 +63,7 @@ import { UpdateProfileFormComponent } from './component/ui/update-profile-form/u
     CodeBlockViewComponent,
     CodeHighlightDirective,
     CommentTimeSortPipe,
-    CodeBlockEditComponent,
     CodeBlockPageComponent,
-    CompilerPageComponent,
     PremiumPageComponent,
     ShareFormComponent,
     ProfilePageComponent,
@@ -95,7 +92,8 @@ import { UpdateProfileFormComponent } from './component/ui/update-profile-form/u
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
