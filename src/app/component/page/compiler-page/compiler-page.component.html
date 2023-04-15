@@ -1,0 +1,92 @@
+<div class="compiler-page-container"
+     *ngIf="authenticationContextService.isAuthorized$ | async; else compilerClosed">
+  <mat-card>
+    <mat-card-title>Java code compiler</mat-card-title>
+    <mat-expansion-panel class="compiler-rules">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Compiler usage rules</mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>{{ compilerRules }}</p>
+    </mat-expansion-panel>
+    <mat-form-field class="form-field-container" appearance="fill">
+      <mat-label>Code</mat-label>
+      <textarea matInput
+                #inputTextarea
+                class="input-textarea"
+                (keydown.tab)="suppressTabEvent($event, inputTextarea)"
+                [(ngModel)]="compilerContent"
+                (focus)="retryInput()"
+                required>
+      </textarea>
+    </mat-form-field>
+    <mat-form-field class="form-field-container" appearance="fill">
+      <mat-label>Arguments</mat-label>
+      <input matInput [(ngModel)]="argsContent">
+    </mat-form-field>
+    <div class="run-container">
+      <mat-spinner *ngIf="loading" [diameter]="50"></mat-spinner>
+      <mat-error class="content-error" *ngIf="errorMessage != ''">{{ errorMessage }}</mat-error>
+      <button mat-raised-button
+              color="primary"
+              class="run-inner-button"
+              (click)="execute()"
+              *ngIf="!loading">
+        Run
+      </button>
+      <button mat-raised-button
+              color="primary"
+              class="run-inner-button"
+              ngxClipboard
+              [cbContent]="compilerContent"
+              *ngIf="!loading">
+        Copy
+      </button>
+      <button mat-raised-button
+              color="primary"
+              class="run-inner-button"
+              (click)="saveCode()"
+              *ngIf="!loading && canSaveCode()">
+        Save
+      </button>
+    </div>
+    <mat-card-subtitle>Code execution results</mat-card-subtitle>
+    <div class="execution-results-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Exit code</mat-label>
+        <textarea matInput
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="1"
+                  value="{{ exitCode }}">
+        </textarea>
+      </mat-form-field>
+      <div class="output-error-container">
+        <mat-form-field appearance="fill" class="output-error-inner">
+          <mat-label>Output</mat-label>
+          <textarea matInput
+                    class="result-textarea"
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="50"
+                    value="{{ output }}">
+          </textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="output-error-inner">
+          <mat-label>Error</mat-label>
+          <textarea matInput
+                    class="result-textarea"
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="50"
+                    value="{{ error }}">
+          </textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+<ng-template #compilerClosed>
+  <div class="compiler-closed-text" >
+    <h2>Sign in to use compiler</h2>
+  </div>
+</ng-template>

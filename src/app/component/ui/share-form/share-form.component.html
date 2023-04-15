@@ -1,0 +1,24 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-container">
+  <h2>{{ title }}</h2>
+  <div class="form-field-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput
+             [formControl]="username"
+             [matAutocomplete]="auto"
+             (focus)="retryInput()"
+             required>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let username of filteredToUserShares | async" [value]="username">
+          {{ username }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="username.invalid">{{ usernameErrorMessage }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-error class="bottom-mat-error-text" *ngIf="!success">{{ errorMessage }}</mat-error>
+  </div>
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  <button mat-raised-button color="primary" type="submit">Share</button>
+</form>

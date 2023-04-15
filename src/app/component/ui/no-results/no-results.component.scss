@@ -1,0 +1,18 @@
+.no-results-message {
+  text-align: center;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #673AB7;
+}
+
+.no-results-element {
+  width: 100%;
+}
+
+.no-results-image {
+  height: 95px;
+  width: 95px;
+}

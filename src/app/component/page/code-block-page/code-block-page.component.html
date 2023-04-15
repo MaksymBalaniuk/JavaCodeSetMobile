@@ -1,0 +1,6 @@
+<app-code-block-view *ngIf="isLoadContextCodeBlockView()"></app-code-block-view>
+<app-code-block-edit *ngIf="isLoadContextCodeBlockEdit()"></app-code-block-edit>
+
+<div class="not-selected-text" *ngIf="isLoadContextCodeBlockNotSelected()">
+  <h2>No code block selected for viewing or editing</h2>
+</div>

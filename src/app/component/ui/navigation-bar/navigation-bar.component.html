@@ -1,0 +1,66 @@
+<mat-toolbar color="primary" class="toolbar-container">
+  <div class="nav-flex-container">
+    <div class="nav-inner-container">
+      <img src="../../../../assets/image/java-code-set-logo.png"
+           alt="JavaCodeSet"
+           class="logo"
+           (click)="redirectToMainPage()"/>
+    </div>
+    <div class="nav-inner-container">
+      <div class="nav-links-container">
+        <button mat-button
+                [ngStyle]="{'text-decoration': isMainPageCurrent() ? 'underline' : 'none'}"
+                color="accent"
+                class="inner-content"
+                (click)="redirectToMainPage()">
+          Main
+        </button>
+        <button mat-button
+                [ngStyle]="{'text-decoration': isCompilerPageCurrent() ? 'underline' : 'none'}"
+                color="accent"
+                class="inner-content"
+                (click)="redirectToCompilerPage()"
+                *ngIf="authenticationContextService.isAuthorized$ | async">
+          Compiler
+        </button>
+        <button mat-button
+                [ngStyle]="{'text-decoration': isPremiumPageCurrent() ? 'underline' : 'none'}"
+                color="accent"
+                class="inner-content"
+                (click)="redirectToPremiumPage()"
+                *ngIf="authenticationContextService.isAuthorized$ | async">
+          Premium
+        </button>
+      </div>
+      <div class="nav-inner-container" *ngIf="!(authenticationContextService.isAuthorized$ | async)">
+        <button mat-raised-button
+                class="inner-content"
+                color="accent"
+                (click)="modalService.showRegistrationForm()">
+          Sign up
+        </button>
+        <button mat-raised-button
+                class="inner-content"
+                color="accent"
+                (click)="modalService.showAuthenticationForm()">
+          Sign in
+        </button>
+      </div>
+      <div class="nav-inner-container" *ngIf="authenticationContextService.isAuthorized$ | async">
+        <mat-icon class="inner-content">account_circle</mat-icon>
+        <mat-icon class="inner-content" *ngIf="userPremium">stars</mat-icon>
+        <p class="inner-content"
+           [ngStyle]="{'text-decoration': isProfilePageCurrent() ? 'underline' : 'none'}"
+           (click)="redirectToProfilePage()">
+          {{ username }}
+        </p>
+        <button mat-raised-button
+                class="inner-content"
+                color="accent"
+                (click)="authenticationContextService.logout()">
+          Sign out
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

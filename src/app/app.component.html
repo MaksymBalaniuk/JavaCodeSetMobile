@@ -1,0 +1,23 @@
+<app-navigation-bar class="navigation-container"></app-navigation-bar>
+<div class="navigation-bar-compensator"></div>
+<router-outlet></router-outlet>
+
+<app-modal *ngIf="modalService.isAuthenticationFormVisible">
+  <app-authentication-form [title]="'Authentication'"></app-authentication-form>
+</app-modal>
+
+<app-modal *ngIf="modalService.isRegistrationFormVisible">
+  <app-registration-form [title]="'Registration'"></app-registration-form>
+</app-modal>
+
+<app-modal *ngIf="modalService.isSessionExpiredFormVisible">
+  <app-authentication-form [title]="'Your session has expired \n please sign in again'"></app-authentication-form>
+</app-modal>
+
+<app-modal *ngIf="modalService.isShareFormVisible">
+  <app-share-form [title]="'Share code block to user'"></app-share-form>
+</app-modal>
+
+<app-modal *ngIf="modalService.isUpdateProfileFormVisible">
+  <app-update-profile-form [title]="'Change profile'"></app-update-profile-form>
+</app-modal>

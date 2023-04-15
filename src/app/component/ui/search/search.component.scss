@@ -1,0 +1,38 @@
+.search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.main-search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
+.search-field {
+  width: 300px;
+  height: fit-content;
+}
+
+.checkbox-container {
+  display: flex;
+  max-height: 52px;
+  flex-direction: row;
+  align-items: center;
+  vertical-align: center;
+}
+
+.simple-checkbox {
+  margin-left: 15px;
+}
+
+.paginator {
+  right: 10px;
+  height: 50px;
+  vertical-align: center;
+  background-color: #FAFAFA;
+}

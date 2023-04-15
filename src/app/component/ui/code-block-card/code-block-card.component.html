@@ -1,0 +1,29 @@
+<mat-card class="code-block">
+  <mat-card-title>{{ codeBlock.title }}</mat-card-title>
+  <mat-card-subtitle>{{ codeBlock.description }}</mat-card-subtitle>
+  <mat-card-content class="code-block-content">{{ codeBlock.content }}</mat-card-content>
+  <mat-chip-list>
+    <mat-chip color="primary"
+              selected
+              *ngFor="let tag of tags"
+              (click)="searchByTag(tag.name)">
+      {{ tag.name }}
+    </mat-chip>
+  </mat-chip-list>
+  <p></p>
+  <mat-card-subtitle>
+    Posted by {{ user ? user.username : 'unknown' }}, last update {{ codeBlock.updated | dateFormatter }}
+  </mat-card-subtitle>
+  <div class="estimates-container">
+    <mat-icon class="estimates-content">thumb_up</mat-icon>
+    <p class="estimates-content">{{ likes }}</p>
+    <mat-icon class="estimates-content">thumb_down</mat-icon>
+    <p class="estimates-content">{{ dislikes }}</p>
+  </div>
+  <mat-card-actions align="end">
+    <button mat-button
+            (click)="viewCodeBlock()">
+      More
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,39 @@
+<div class="main-search-container">
+  <div class="search-container">
+    <mat-form-field class="search-field" appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput [(ngModel)]="filterQuery" (ngModelChange)="search()">
+      <button mat-icon-button
+              matSuffix
+              type="button"
+              (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="checkbox-container">
+      <mat-checkbox class="simple-checkbox"
+                    [checked]="allComplete"
+                    [color]="'primary'"
+                    [indeterminate]="someComplete()"
+                    (change)="setAllAndSearch($event.checked)">
+        {{task.name}}
+      </mat-checkbox>
+      <div *ngIf="!allComplete">
+        <mat-checkbox class="simple-checkbox"
+                      *ngFor="let subtask of task.subtasks"
+                      [(ngModel)]="subtask.completed"
+                      [color]="'primary'"
+                      (change)="updateAllCompleteAndSearch()">
+          {{subtask.name}}
+        </mat-checkbox>
+      </div>
+    </div>
+  </div>
+  <mat-paginator class="paginator"
+                 [length]="paginatorService.length"
+                 [pageSize]="paginatorService.pageSize"
+                 [pageSizeOptions]="paginatorService.pageSizeOptions"
+                 [pageIndex]="paginatorService.pageIndex"
+                 (page)="paginatorService.changePaginationOptions($event); search()">
+  </mat-paginator>
+</div>

@@ -1,0 +1,110 @@
+<div class="code-block-page-container" *ngIf="codeBlock != null">
+  <div class="title">
+    <h2>{{ codeBlock.title }}</h2>
+  </div>
+  <div class="description">
+    <h3>{{ codeBlock.description }}</h3>
+  </div>
+  <div class="author">
+    <h4>
+      Posted by {{ author == undefined ? 'unknown' : author.username }},
+      last update {{ codeBlock.updated | dateFormatter }}
+    </h4>
+  </div>
+  <mat-card *ngIf="codeBlock != null &&
+            (codeBlock.userId == currentUserDetails.user?.id ||
+            currentUserPermissions.publicStorageManagementPermission)">
+    <mat-card-subtitle>Code block actions</mat-card-subtitle>
+    <div class="actions-container">
+      <button mat-raised-button class="action-button" color="primary" (click)="publishCodeBlock()"
+              *ngIf="!isCodeBlockPublic() && currentUserPermissions.publicStorageManagementPermission">
+        Publish
+      </button>
+      <button mat-raised-button class="action-button" color="primary" (click)="hideCodeBlock()"
+              *ngIf="isCodeBlockPublic() && currentUserPermissions.publicStorageManagementPermission">
+        Hide
+      </button>
+      <button mat-raised-button class="action-button" color="primary" (click)="shareCodeBlock()"
+              *ngIf="codeBlock.userId == currentUserDetails.user?.id">
+        Share
+      </button>
+      <button mat-raised-button class="action-button" color="primary" (click)="editCodeBlock()">
+        Edit
+      </button>
+      <button mat-raised-button class="action-button" color="primary" (click)="deleteCodeBlock()">
+        Delete
+      </button>
+    </div>
+  </mat-card>
+  <mat-card class="code-container">
+    <pre appCodeHighlight>
+      <code data-language="java">{{ '\n' + codeBlock.content }}</code>
+    </pre>
+    <mat-card-actions>
+      <button mat-button
+              ngxClipboard
+              [cbContent]="codeBlock.content">
+        Copy code
+      </button>
+      <button mat-button (click)="addNewCodeBlock()">
+        Save code
+      </button>
+      <button mat-button (click)="openCodeBlockInCompiler()">
+        Open code in compiler
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <div class="estimates-tags-container">
+    <mat-chip-list class="tags-container">
+      <mat-chip color="primary"
+                selected
+                *ngFor="let tag of tags"
+                (click)="searchByTag(tag.name)">
+        {{ tag.name }}
+      </mat-chip>
+    </mat-chip-list>
+    <div class="estimates-container">
+      <mat-icon class="estimates-content"
+                [ngStyle]="{
+                  color: isCodeBlockLikedByCurrentUser() ? '#673AB7' : 'black'
+                }"
+                (click)="like()">
+        thumb_up
+      </mat-icon>
+      <p class="estimates-content">{{ likes }}</p>
+      <mat-icon class="estimates-content"
+                [ngStyle]="{
+                  color: isCodeBlockDislikedByCurrentUser() ? '#673AB7' : 'black'
+                }"
+                (click)="dislike()">
+        thumb_down
+      </mat-icon>
+      <p class="estimates-content">{{ dislikes }}</p>
+    </div>
+  </div>
+  <mat-expansion-panel class="comments-container" (opened)="loadComments()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Comments</mat-panel-title>
+      <mat-panel-description *ngIf="!(authenticationContextService.isAuthorized$ | async)">
+        Sign in to be able to write comments and rate the code
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-card *ngIf="authenticationContextService.isAuthorized$ | async">
+      <form>
+        <mat-form-field appearance="fill" class="comment-field">
+          <mat-label>Leave a comment</mat-label>
+          <textarea matInput
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    [(ngModel)]="commentText" [ngModelOptions]="{standalone: true}"></textarea>
+        </mat-form-field>
+      </form>
+      <mat-card-actions align="end">
+        <button mat-button (click)="leaveComment()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <app-comment *ngFor="let comment of comments | commentTimeSort" [comment]="comment"></app-comment>
+  </mat-expansion-panel>
+</div>

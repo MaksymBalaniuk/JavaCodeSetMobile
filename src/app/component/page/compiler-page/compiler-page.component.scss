@@ -1,0 +1,100 @@
+p {
+  white-space: pre-wrap;
+}
+
+.compiler-page-container {
+  background-color: #FAFAFA;
+  margin-right: 0;
+  margin-left: 0;
+  padding: 20px;
+}
+
+.form-field-container {
+  margin-top: 5px;
+  width: 100%;
+}
+
+.run-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+  align-items: center;
+  margin: 0 -5px;
+}
+
+.run-inner-button {
+  margin: 0 5px;
+}
+
+mat-card-subtitle {
+  text-align: center;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.input-textarea {
+  min-height: 100px;
+}
+
+.input-textarea::-webkit-scrollbar {
+  width: 10px;
+}
+
+.input-textarea::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
+  border-radius: 10px;
+}
+
+.input-textarea::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #673AB7;
+}
+
+.result-textarea::-webkit-scrollbar {
+  width: 10px;
+}
+
+.result-textarea::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
+  border-radius: 10px;
+}
+
+.result-textarea::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #673AB7;
+}
+
+.execution-results-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.output-error-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.output-error-inner {
+  width: 49%;
+}
+
+.compiler-closed-text {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.content-error {
+  margin-right: 5px;
+  height: 100%;
+}
+
+.compiler-rules {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,39 @@
+.toolbar-container {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.nav-flex-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-inner-container, .nav-links-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  vertical-align: center;
+  margin: 0 -5px;
+}
+
+.nav-links-container {
+  padding-right: 10px;
+}
+
+p:hover {
+  cursor: pointer;
+}
+
+.inner-content {
+  margin: 0 5px;
+}
+
+.logo {
+  height: 54px;
+  width: 140px;
+  cursor: pointer;
+}

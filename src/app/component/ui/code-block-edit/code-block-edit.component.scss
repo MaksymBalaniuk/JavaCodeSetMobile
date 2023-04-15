@@ -1,0 +1,40 @@
+.code-block-edit-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field-container {
+  margin-top: 5px;
+  width: 100%;
+}
+
+.code-block-edit-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.content-error {
+  margin-right: 10px;
+}
+
+.content-textarea {
+  min-height: 100px;
+}
+
+.content-textarea::-webkit-scrollbar {
+  width: 10px;
+}
+
+.content-textarea::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
+  border-radius: 10px;
+}
+
+.content-textarea::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #673AB7;
+}

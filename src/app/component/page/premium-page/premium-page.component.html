@@ -1,0 +1,65 @@
+<div class="premium-page-container"
+     *ngIf="authenticationContextService.isAuthorized$ | async; else premiumClosed">
+  <div class="premium-cards-container">
+    <mat-card class="premium-card" *ngIf="noneUserPremiumLimits != null">
+      <mat-card-title>No premium</mat-card-title>
+      <mat-card-subtitle>Starter plan upon registration</mat-card-subtitle>
+      <mat-card-content>
+        <p>Private code blocks limit: {{ noneUserPremiumLimits.codeBlocksLimit }}</p>
+        <p>Code block content length limit: {{ noneUserPremiumLimits.codeBlockContentLimit }}</p>
+        <p>Compiler code length limit: {{ noneUserPremiumLimits.compilerContentLimit }}</p>
+      </mat-card-content>
+      <mat-card-subtitle>Available upon registration</mat-card-subtitle>
+      <mat-card-actions align="end">
+        <button mat-button *ngIf="isUserPremiumNone(); else emptyButton">
+          Your current plan
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card class="premium-card" *ngIf="ordinaryUserPremiumLimits != null">
+      <mat-card-title>Regular premium</mat-card-title>
+      <mat-card-subtitle>Advanced plan for convenience</mat-card-subtitle>
+      <mat-card-content>
+        <p>Private code blocks limit: {{ ordinaryUserPremiumLimits.codeBlocksLimit }}</p>
+        <p>Code block content length limit: {{ ordinaryUserPremiumLimits.codeBlockContentLimit }}</p>
+        <p>Compiler code length limit: {{ ordinaryUserPremiumLimits.compilerContentLimit }}</p>
+      </mat-card-content>
+      <mat-card-subtitle>Available for purchase for 15$</mat-card-subtitle>
+      <mat-card-actions align="end">
+        <button mat-button *ngIf="isUserPremiumOrdinary()">
+          Your current plan
+        </button>
+        <button mat-button
+                *ngIf="!isUserPremiumOrdinary() && !isUserPremiumUnlimited()"
+                (click)="buyOrdinaryPremium()">
+          Buy
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card class="premium-card" *ngIf="unlimitedUserPremiumLimits != null">
+      <mat-card-title>Unlimited premium</mat-card-title>
+      <mat-card-subtitle>Special plan for developers</mat-card-subtitle>
+      <mat-card-content>
+        <p>Private code blocks limit: unlimited</p>
+        <p>Code block content length limit: unlimited</p>
+        <p>Compiler code length limit: unlimited</p>
+      </mat-card-content>
+      <mat-card-subtitle>Available for site administration</mat-card-subtitle>
+      <mat-card-actions align="end">
+        <button mat-button *ngIf="isUserPremiumUnlimited(); else emptyButton">
+          Your current plan
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #premiumClosed>
+  <div class="premium-closed-text" >
+    <h2>Sign in to browse premium</h2>
+  </div>
+</ng-template>
+
+<ng-template #emptyButton>
+  <button mat-button></button>
+</ng-template>

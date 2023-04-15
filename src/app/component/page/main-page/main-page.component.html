@@ -1,0 +1,76 @@
+<div class="main-page-container">
+  <app-search></app-search>
+  <mat-tab-group
+    mat-stretch-tabs
+    class="tabs"
+    [(selectedIndex)]="selectedTabIndex"
+    (selectedTabChange)="tabChanged($event)"
+    animationDuration="0ms">
+    <mat-tab label="Public storage">
+      <ng-template matTabContent>
+        <div class="code-blocks-container">
+          <app-code-block-card
+            *ngFor="let codeBlock of codeBlocks | codeBlockTimeSort | codeBlockPaginator"
+            [codeBlock]="codeBlock">
+          </app-code-block-card>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Private storage"
+             *ngIf="authenticationContextService.isAuthorized$ | async">
+      <ng-template matTabContent>
+        <div class="code-blocks-container">
+          <app-code-block-card
+            *ngFor="let codeBlock of codeBlocks | codeBlockTimeSort | codeBlockPaginator"
+            [codeBlock]="codeBlock">
+          </app-code-block-card>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Favorites storage"
+             *ngIf="authenticationContextService.isAuthorized$ | async">
+      <ng-template matTabContent>
+        <div class="code-blocks-container">
+          <app-code-block-card
+            *ngFor="let codeBlock of codeBlocks | codeBlockTimeSort | codeBlockPaginator"
+            [codeBlock]="codeBlock">
+          </app-code-block-card>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Shared storage"
+             *ngIf="authenticationContextService.isAuthorized$ | async">
+      <ng-template matTabContent>
+        <div class="chip-list-container" *ngIf="fromUserShares.length > 0">
+          <mat-chip-list>
+            <mat-chip color="primary"
+                      *ngFor="let user of fromUserShares"
+                      [selected]="isShareChipSelected(user)"
+                      (click)="changeSelectedUser(user)">
+              {{ user.username }}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+        <div class="code-blocks-container">
+          <app-code-block-card
+            *ngFor="let codeBlock of codeBlocks | codeBlockTimeSort | codeBlockPaginator"
+            [codeBlock]="codeBlock">
+          </app-code-block-card>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<div class="add-button" *ngIf="addCodeBlockButtonVisible && isAddCodeBlockButtonAvailable()">
+  <button mat-mini-fab
+          color="accent"
+          (click)="addNewCodeBlock()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<app-no-results
+  class="no-results"
+  *ngIf="codeBlocks.length == 0">
+</app-no-results>

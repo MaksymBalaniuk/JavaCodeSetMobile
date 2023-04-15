@@ -1,0 +1,67 @@
+h2 {
+  font-size: 300%;
+  white-space: normal;
+}
+
+h3 {
+  font-size: 200%;
+  white-space: normal;
+}
+
+h4 {
+  font-size: 150%;
+  white-space: normal;
+}
+
+code {
+  white-space: pre-wrap;
+}
+
+mat-icon:hover {
+  cursor: pointer;
+}
+
+.title, .description, .code-container, .estimates-container, .tags-container, .actions-container {
+  margin-top: 5px;
+}
+
+.actions-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 0 -5px;
+}
+
+.action-button {
+  margin: 0 5px;
+}
+
+.estimates-tags-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.estimates-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.estimates-content {
+  margin: 0 5px;
+}
+
+.comments-container {
+  margin-top: 5px;
+}
+
+.comment-field {
+  width: 100%;
+}
+
+textarea::-webkit-scrollbar {
+  width: 0;
+}

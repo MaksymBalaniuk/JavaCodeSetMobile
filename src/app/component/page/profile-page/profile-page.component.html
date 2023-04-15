@@ -1,0 +1,26 @@
+<div class="profile-page-container">
+  <app-profile-card [user]="currentUser"></app-profile-card>
+  <div class="profile-search-container">
+    <mat-form-field class="search-field" appearance="fill">
+      <mat-label>Search profile</mat-label>
+      <input matInput [(ngModel)]="filterQuery" (ngModelChange)="searchProfile()">
+      <button mat-icon-button
+              matSuffix
+              type="button"
+              (click)="searchProfile()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="profiles-container" *ngIf="users.length > 0">
+    <app-profile-card *ngFor="let user of users"
+                      [user]="user"
+                      [marginTop]="'10px'">
+    </app-profile-card>
+  </div>
+</div>
+
+<app-no-results
+  class="no-results"
+  *ngIf="users.length == 0 && filterQuery != ''">
+</app-no-results>
