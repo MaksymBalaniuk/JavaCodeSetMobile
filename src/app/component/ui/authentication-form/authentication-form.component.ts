@@ -7,6 +7,7 @@ import {AuthenticationContextService} from "../../../service/authentication-cont
 import {DataLoadContextService} from "../../../service/data-load-context.service";
 import {ModalService} from "../../../service/modal.service";
 import {ErrorService} from "../../../service/error.service";
+import {NavigationService} from "../../../service/navigation.service";
 
 @Component({
   selector: 'app-authentication-form',
@@ -42,7 +43,8 @@ export class AuthenticationFormComponent implements OnInit {
               private authenticationContextService: AuthenticationContextService,
               private dataLoadContextService: DataLoadContextService,
               private modalService: ModalService,
-              private errorService: ErrorService) { }
+              private errorService: ErrorService,
+              private navigationService: NavigationService) { }
 
   ngOnInit(): void { }
 
@@ -115,11 +117,17 @@ export class AuthenticationFormComponent implements OnInit {
           this.success = false;
         } else if (authenticationProcess) {
           authenticationProcess = false;
-          this.authenticationContextService.login(this.authenticationResponse);
-          this.errorService.clear();
-          this.modalService.hideForm();
+          this.authenticationContextService.login(this.authenticationResponse).subscribe(() => {
+            this.errorService.clear();
+            this.modalService.hideForm();
+            this.back();
+          });
         }
       });
     }
+  }
+
+  back(): void {
+    this.navigationService.redirectToLastLoadedPage();
   }
 }

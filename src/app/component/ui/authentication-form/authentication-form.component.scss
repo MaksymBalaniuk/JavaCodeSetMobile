@@ -1,6 +1,7 @@
 .form-container {
-  width: 300px;
-  padding: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -9,7 +10,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  margin: auto;
 }
 
 .mat-form-field {

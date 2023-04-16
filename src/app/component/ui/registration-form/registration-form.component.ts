@@ -7,6 +7,7 @@ import {AuthenticationContextService} from "../../../service/authentication-cont
 import {DataLoadContextService} from "../../../service/data-load-context.service";
 import {ModalService} from "../../../service/modal.service";
 import {ErrorService} from "../../../service/error.service";
+import {NavigationService} from "../../../service/navigation.service";
 
 @Component({
   selector: 'app-registration-form',
@@ -47,7 +48,8 @@ export class RegistrationFormComponent implements OnInit {
               private authenticationContextService: AuthenticationContextService,
               private dataLoadContextService: DataLoadContextService,
               private modalService: ModalService,
-              private errorService: ErrorService) { }
+              private errorService: ErrorService,
+              private navigationService: NavigationService) { }
 
   ngOnInit(): void { }
 
@@ -151,11 +153,17 @@ export class RegistrationFormComponent implements OnInit {
           this.authenticationContextService.login({
             token: this.registerResponse.token,
             id: this.registerResponse.id
+          }).subscribe(() => {
+            this.errorService.clear();
+            this.modalService.hideForm();
+            this.back();
           });
-          this.errorService.clear();
-          this.modalService.hideForm();
         }
       });
     }
+  }
+
+  back(): void {
+    this.navigationService.redirectToLastLoadedPage();
   }
 }

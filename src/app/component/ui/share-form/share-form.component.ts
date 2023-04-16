@@ -8,6 +8,7 @@ import {ModalService} from "../../../service/modal.service";
 import {ShareService} from "../../../service/api/share.service";
 import {DataLoadContextService} from "../../../service/data-load-context.service";
 import {ShareEntity} from "../../../entity/share-entity";
+import {NavigationService} from "../../../service/navigation.service";
 
 @Component({
   selector: 'app-share-form',
@@ -42,7 +43,8 @@ export class ShareFormComponent implements OnInit, OnDestroy {
               private shareService: ShareService,
               private dataLoadContextService: DataLoadContextService,
               private modalService: ModalService,
-              private errorService: ErrorService) { }
+              private errorService: ErrorService,
+              private navigationService: NavigationService) { }
 
   ngOnInit(): void {
     const currentUserDetails = this.dataLoadContextService.userDetails;
@@ -180,10 +182,15 @@ export class ShareFormComponent implements OnInit, OnDestroy {
               .subscribe(() => {
                 this.errorService.clear();
                 this.modalService.hideForm();
+                this.back();
               });
           }
         }
       });
     }
+  }
+
+  back(): void {
+    this.navigationService.redirectToLastLoadedPage();
   }
 }

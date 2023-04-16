@@ -8,6 +8,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSelectChange} from "@angular/material/select";
 import {ErrorService} from "../../../service/error.service";
 import {ModalService} from "../../../service/modal.service";
+import {NavigationService} from "../../../service/navigation.service";
 
 @Component({
   selector: 'app-update-profile-form',
@@ -49,7 +50,8 @@ export class UpdateProfileFormComponent implements OnInit, OnDestroy {
   constructor(private authenticationContextService: AuthenticationContextService,
               private userService: UserService,
               private errorService: ErrorService,
-              private modalService: ModalService) { }
+              private modalService: ModalService,
+              private navigationService: NavigationService) { }
 
   ngOnInit(): void {
     this.currentUserDetailsSubscription$ = this.authenticationContextService.userDetails$
@@ -165,10 +167,16 @@ export class UpdateProfileFormComponent implements OnInit, OnDestroy {
         this.success = false;
       } else if (updateProcess) {
         updateProcess = false;
-        this.authenticationContextService.login(this.authenticationResponse);
-        this.errorService.clear();
-        this.modalService.hideForm();
+        this.authenticationContextService.login(this.authenticationResponse).subscribe(() => {
+          this.errorService.clear();
+          this.modalService.hideForm();
+          this.back();
+        });
       }
     });
+  }
+
+  back(): void {
+    this.navigationService.redirectToLastLoadedPage();
   }
 }

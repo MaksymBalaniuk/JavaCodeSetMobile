@@ -1,0 +1,21 @@
+<div class="modal-container">
+  <app-authentication-form *ngIf="modalService.isAuthenticationFormVisible"
+                           [title]="'Authentication'">
+  </app-authentication-form>
+
+  <app-registration-form *ngIf="modalService.isRegistrationFormVisible"
+                         [title]="'Registration'">
+  </app-registration-form>
+
+  <app-authentication-form *ngIf="modalService.isSessionExpiredFormVisible"
+                           [title]="'Your session has expired \n please sign in again'">
+  </app-authentication-form>
+
+  <app-share-form *ngIf="modalService.isShareFormVisible"
+                  [title]="'Share code block to user'">
+  </app-share-form>
+
+  <app-update-profile-form *ngIf="modalService.isUpdateProfileFormVisible"
+                           [title]="'Change profile'">
+  </app-update-profile-form>
+</div>

@@ -21,8 +21,6 @@ export class NavigationService {
   setCurrentPage(url: string) {
     if (url == '/') {
       this.currentPage$.next(CurrentPage.MAIN);
-    } else if (url == '/compiler') {
-      this.currentPage$.next(CurrentPage.COMPILER);
     } else if (url == '/premium') {
       this.currentPage$.next(CurrentPage.PREMIUM);
     } else if (url == '/code-block') {
@@ -32,12 +30,20 @@ export class NavigationService {
     }
   }
 
-  redirectToMainPage(): void {
-    this.router.navigateByUrl('').then();
+  redirectToLastLoadedPage(): void {
+    if (this.currentPage$.value == CurrentPage.MAIN) {
+      this.redirectToMainPage();
+    } else if (this.currentPage$.value == CurrentPage.PREMIUM) {
+      this.redirectToPremiumPage();
+    } else if (this.currentPage$.value == CurrentPage.CODE_BLOCK) {
+      this.redirectToCodeBlockPage();
+    } else if (this.currentPage$.value == CurrentPage.PROFILE) {
+      this.redirectToProfilePage();
+    }
   }
 
-  redirectToCompilerPage(): void {
-    this.router.navigateByUrl('compiler').then();
+  redirectToMainPage(): void {
+    this.router.navigateByUrl('').then();
   }
 
   redirectToPremiumPage(): void {
@@ -50,5 +56,9 @@ export class NavigationService {
 
   redirectToProfilePage(): void {
     this.router.navigateByUrl('profile').then();
+  }
+
+  redirectToModalPage(): void {
+    this.router.navigateByUrl('modal').then();
   }
 }

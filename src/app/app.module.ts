@@ -24,7 +24,6 @@ import {MatCardModule} from "@angular/material/card";
 import {MatChipsModule} from "@angular/material/chips";
 import { MainPageComponent } from './component/page/main-page/main-page.component';
 import {MatTabsModule} from "@angular/material/tabs";
-import { ModalComponent } from './component/ui/modal/modal.component';
 import { AuthenticationFormComponent } from './component/ui/authentication-form/authentication-form.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { RegistrationFormComponent } from './component/ui/registration-form/registration-form.component';
@@ -44,6 +43,7 @@ import { ProfilePageComponent } from './component/page/profile-page/profile-page
 import { ProfileCardComponent } from './component/ui/profile-card/profile-card.component';
 import { UpdateProfileFormComponent } from './component/ui/update-profile-form/update-profile-form.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { ModalPageComponent } from './component/page/modal-page/modal-page.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +56,6 @@ import {MatMenuModule} from "@angular/material/menu";
     SearchComponent,
     CodeBlockCardComponent,
     MainPageComponent,
-    ModalComponent,
     AuthenticationFormComponent,
     RegistrationFormComponent,
     CommentComponent,
@@ -68,7 +67,8 @@ import {MatMenuModule} from "@angular/material/menu";
     ShareFormComponent,
     ProfilePageComponent,
     ProfileCardComponent,
-    UpdateProfileFormComponent
+    UpdateProfileFormComponent,
+    ModalPageComponent
   ],
   imports: [
     BrowserModule,

@@ -95,8 +95,9 @@ export class PremiumPageComponent implements OnInit, OnDestroy {
     if (user != null && token != null) {
       this.userService.updateUserPremiumById(user.id, UserPremium.ORDINARY, token)
         .subscribe(authenticationResponse => {
-          this.authenticationContextService.login(authenticationResponse);
-          window.location.href = 'https://pay.fondy.eu/s/zK7KgqGDs46UG1b';
+          this.authenticationContextService.login(authenticationResponse).subscribe(() => {
+            window.location.href = 'https://pay.fondy.eu/s/zK7KgqGDs46UG1b';
+          });
         });
     }
   }
