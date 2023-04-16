@@ -7,23 +7,26 @@
 }
 
 .search-field {
-  max-width: 100%;
+  width: 100%;
   height: fit-content;
+  margin-right: 5px;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .checkbox-container {
-  display: flex;
-  max-height: 52px;
-  flex-direction: row;
-  align-items: center;
-  vertical-align: center;
+  max-width: 40%;
 }
 
-.simple-checkbox {
-  margin-left: 15px;
+ul {
+  list-style-type: none;
 }
 
 .paginator {
-  vertical-align: center;
+  max-width: 60%;
   background-color: #FAFAFA;
 }

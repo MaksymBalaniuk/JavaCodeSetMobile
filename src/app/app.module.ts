@@ -44,6 +44,7 @@ import { ProfileCardComponent } from './component/ui/profile-card/profile-card.c
 import { UpdateProfileFormComponent } from './component/ui/update-profile-form/update-profile-form.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { ModalPageComponent } from './component/page/modal-page/modal-page.component';
+import {MatBadgeModule} from "@angular/material/badge";
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { ModalPageComponent } from './component/page/modal-page/modal-page.compo
     MatProgressSpinnerModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   task!: FilterCodeBlockTask;
   allComplete: boolean = true;
   filterQuery = '';
+  filterHidden = true;
 
   filterCodeBlockTaskSubscription$!: Subscription;
   filterQuerySubscription$!: Subscription;

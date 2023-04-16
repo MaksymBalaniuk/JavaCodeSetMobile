@@ -4,34 +4,44 @@
     <input matInput [(ngModel)]="filterQuery" (ngModelChange)="search()">
     <button mat-icon-button
             matSuffix
-            type="button"
             (click)="search()">
       <mat-icon>search</mat-icon>
     </button>
+    <button mat-icon-button
+            matSuffix
+            matBadge="!"
+            matBadgeSize="small"
+            [matBadgeHidden]="this.allComplete"
+            (click)="filterHidden = !filterHidden">
+      <mat-icon>filter_list</mat-icon>
+    </button>
   </mat-form-field>
-  <div class="checkbox-container">
-    <mat-checkbox class="simple-checkbox"
-                  [checked]="allComplete"
-                  [color]="'primary'"
-                  [indeterminate]="someComplete()"
-                  (change)="setAllAndSearch($event.checked)">
-      {{task.name}}
-    </mat-checkbox>
-    <div *ngIf="!allComplete">
-      <mat-checkbox class="simple-checkbox"
-                    *ngFor="let subtask of task.subtasks"
-                    [(ngModel)]="subtask.completed"
+  <div *ngIf="!filterHidden" class="filter-container">
+    <div class="checkbox-container">
+      <mat-checkbox [checked]="allComplete"
                     [color]="'primary'"
-                    (change)="updateAllCompleteAndSearch()">
-        {{subtask.name}}
+                    [indeterminate]="someComplete()"
+                    (change)="setAllAndSearch($event.checked)">
+        {{task.name}}
       </mat-checkbox>
+      <div *ngIf="!allComplete">
+        <ul>
+          <li *ngFor="let subtask of task.subtasks">
+            <mat-checkbox [(ngModel)]="subtask.completed"
+                          [color]="'primary'"
+                          (change)="updateAllCompleteAndSearch()">
+              {{subtask.name}}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </div>
     </div>
+    <mat-paginator class="paginator"
+                   [length]="paginatorService.length"
+                   [pageSize]="paginatorService.pageSize"
+                   [pageSizeOptions]="paginatorService.pageSizeOptions"
+                   [pageIndex]="paginatorService.pageIndex"
+                   (page)="paginatorService.changePaginationOptions($event); search()">
+    </mat-paginator>
   </div>
-  <mat-paginator class="paginator"
-                 [length]="paginatorService.length"
-                 [pageSize]="paginatorService.pageSize"
-                 [pageSizeOptions]="paginatorService.pageSizeOptions"
-                 [pageIndex]="paginatorService.pageIndex"
-                 (page)="paginatorService.changePaginationOptions($event); search()">
-  </mat-paginator>
 </div>
