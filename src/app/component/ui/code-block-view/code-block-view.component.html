@@ -77,7 +77,7 @@
     <mat-expansion-panel-header>
       <mat-panel-title>Comments</mat-panel-title>
       <mat-panel-description *ngIf="!(authenticationContextService.isAuthorized$ | async)">
-        Sign in to be able to write comments and rate the code
+        Sign in to to write comment
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-card *ngIf="authenticationContextService.isAuthorized$ | async">
