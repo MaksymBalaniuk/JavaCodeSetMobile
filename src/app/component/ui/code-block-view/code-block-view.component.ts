@@ -20,6 +20,7 @@ import {CodeBlockType} from "../../../enumeration/code-block-type";
 import {LoadContext} from "../../../enumeration/load-context";
 import {NavigationService} from "../../../service/navigation.service";
 import {ModalService} from "../../../service/modal.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-code-block-view',
@@ -36,7 +37,6 @@ export class CodeBlockViewComponent implements OnInit {
   currentUserPermissions!: UserPermissions;
   currentUserEstimate!: EstimateEntity | null;
   author!: UserEntity;
-  commentText = '';
   comments!: Array<CommentEntity>;
   tags!: Array<TagEntity>;
   estimates!: Array<EstimateEntity>;
@@ -54,6 +54,10 @@ export class CodeBlockViewComponent implements OnInit {
   deleteEstimateSubscription$!: Subscription;
   createCommentSubscription$!: Subscription;
   deleteCodeBlockSubscription$!: Subscription;
+
+  form = new FormGroup({
+    commentText: new FormControl('', [Validators.required])
+  });
 
   constructor(private dataLoadContextService: DataLoadContextService,
               public authenticationContextService: AuthenticationContextService,
@@ -278,21 +282,35 @@ export class CodeBlockViewComponent implements OnInit {
       });
   }
 
+  get commentText(): FormControl {
+    return this.form.controls.commentText;
+  }
+
+  get commentTextErrorMessage(): string {
+    return this.form.controls.commentText.hasError('required') ? 'You must enter a value' : '';
+  }
+
+  successValidation(): boolean {
+    return this.commentTextErrorMessage == '';
+  }
+
   leaveComment(): void {
-    if (this.createCommentSubscription$ != undefined) {
-      this.createCommentSubscription$.unsubscribe();
-    }
-    if (this.currentUserDetails != undefined &&
-      this.currentUserDetails.user != null &&
-      this.codeBlock != null) {
-      this.createCommentSubscription$ = this.commentsService.createComment({
-        id: '',
-        comment: this.commentText,
-        created: 0,
-        updated: 0,
-        userId: this.currentUserDetails.user.id,
-        codeBlockId: this.codeBlock.id
-      }, this.currentUserDetails.token).subscribe(() => this.loadComments());
+    if (this.successValidation()) {
+      if (this.createCommentSubscription$ != undefined) {
+        this.createCommentSubscription$.unsubscribe();
+      }
+      if (this.currentUserDetails != undefined &&
+        this.currentUserDetails.user != null &&
+        this.codeBlock != null) {
+        this.createCommentSubscription$ = this.commentsService.createComment({
+          id: '',
+          comment: this.commentText.value.toString().trim(),
+          created: 0,
+          updated: 0,
+          userId: this.currentUserDetails.user.id,
+          codeBlockId: this.codeBlock.id
+        }, this.currentUserDetails.token).subscribe(() => this.loadComments());
+      }
     }
   }
 

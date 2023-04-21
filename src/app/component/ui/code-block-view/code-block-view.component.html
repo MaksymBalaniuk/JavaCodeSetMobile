@@ -81,20 +81,23 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-card *ngIf="authenticationContextService.isAuthorized$ | async">
-      <form>
+      <form [formGroup]="form" (ngSubmit)="leaveComment()">
         <mat-form-field appearance="fill" class="comment-field">
           <mat-label>Leave a comment</mat-label>
           <textarea matInput
                     cdkTextareaAutosize
                     cdkAutosizeMinRows="1"
-                    [(ngModel)]="commentText" [ngModelOptions]="{standalone: true}"></textarea>
+                    [formControl]="commentText"
+                    required>
+          </textarea>
+          <mat-error *ngIf="commentText.invalid">{{ commentTextErrorMessage }}</mat-error>
         </mat-form-field>
+        <div class="send-button">
+          <button mat-button type="submit">
+            <mat-icon>send</mat-icon>
+          </button>
+        </div>
       </form>
-      <mat-card-actions align="end">
-        <button mat-button (click)="leaveComment()">
-          <mat-icon>send</mat-icon>
-        </button>
-      </mat-card-actions>
     </mat-card>
     <app-comment *ngFor="let comment of comments | commentTimeSort" [comment]="comment"></app-comment>
   </mat-expansion-panel>
