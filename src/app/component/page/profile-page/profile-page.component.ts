@@ -53,6 +53,8 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
       this.searchUsersByUsernameSubscription$ = this.userService.searchUsersByUsername(this.filterQuery)
         .subscribe(users => this.users = users.filter(user => user.id != currentUser.id));
+    } else if (this.filterQuery == '') {
+      this.users = [];
     }
   }
 }
